@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.mapper.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.model.Question">
+    <id column="question_Id" jdbcType="INTEGER" property="questionId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="option_A" jdbcType="VARCHAR" property="optionA" />
+    <result column="option_B" jdbcType="VARCHAR" property="optionB" />
+    <result column="option_C" jdbcType="VARCHAR" property="optionC" />
+    <result column="option_D" jdbcType="VARCHAR" property="optionD" />
+    <result column="answer" jdbcType="CHAR" property="answer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    question_Id, title, option_A, option_B, option_C, option_D, answer
+  </sql>
+
+  <select id="selectQuestion" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from t_question
+  </select>
+  <select id="selectQuestionByTitle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_question
+    where title = #{title,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_question
+    where question_Id = #{questionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_question
+    where question_Id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjpowernode.model.Question">
+    insert into t_question (question_Id, title, option_A, 
+      option_B, option_C, option_D, 
+      answer)
+    values (#{questionId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{optionA,jdbcType=VARCHAR}, 
+      #{optionB,jdbcType=VARCHAR}, #{optionC,jdbcType=VARCHAR}, #{optionD,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpowernode.model.Question">
+    insert into t_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        question_Id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="optionA != null">
+        option_A,
+      </if>
+      <if test="optionB != null">
+        option_B,
+      </if>
+      <if test="optionC != null">
+        option_C,
+      </if>
+      <if test="optionD != null">
+        option_D,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="optionA != null">
+        #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.model.Question">
+    update t_question
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="optionA != null">
+        option_A = #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        option_B = #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        option_C = #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        option_D = #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=CHAR},
+      </if>
+    </set>
+    where question_Id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.model.Question">
+    update t_question
+    set title = #{title,jdbcType=VARCHAR},
+      option_A = #{optionA,jdbcType=VARCHAR},
+      option_B = #{optionB,jdbcType=VARCHAR},
+      option_C = #{optionC,jdbcType=VARCHAR},
+      option_D = #{optionD,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=CHAR}
+    where question_Id = #{questionId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/1790?useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    <!--配置连接工厂-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--指定MyBatis的主配置文件路径，这里我们不需要指定因为直接通过注解找到SQL映射-->
+        <!--<property name="configLocation" value="classpath:mybatis.xml"/>-->
+    </bean>
+    <!--启动MyBatis的注解扫描， 用于扫描所有携带@Mapper的Java作为SQL映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--通知MyBatis和Spring,携带@Mapper注解的类在哪个目录下 -->
+        <property name="basePackage" value="com.bjpowernode.mapper"/>
+    </bean>
+
+</beans>
