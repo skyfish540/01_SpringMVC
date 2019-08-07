@@ -49,4 +49,18 @@ public class QuestionServiceImpl implements QuesionService {
         int result = questionMapper.updateByPrimaryKey(question);
         return result;
     }
+
+    @Override
+    public Integer deleteQuestion(Integer[] questionId) {
+        Integer result=0;
+        if (questionId!=null){
+            for (Integer id : questionId){
+                result = questionMapper.deleteByPrimaryKey(id);
+                result+=1;
+            }
+            return (result-1);
+        }else {
+            return 0;
+        }
+    }
 }

@@ -66,6 +66,20 @@ public class QuestionController {
     @RequestMapping("/question/private/update.do")
     public String updateQuestion(Question question){
         Integer result=quesionService.updateQuestion(question);
+        return "redirect:/question/private/find.do";
+    }
+
+    @RequestMapping("/question/private/delete.do")
+    public String deleteQuestion(Integer[] questionId,Model model){
+        Integer result=quesionService.deleteQuestion(questionId);
+        switch (result){
+            case 0:
+                model.addAttribute("errorMessage", "请选择要删除的试题");
+                return "redirect:/question/private/find.do";
+        }
+        System.out.println("------------------------");
+        System.out.println(result);
+        model.addAttribute("success", "共删除"+result+"记录");
 
         return "redirect:/question/private/find.do";
     }

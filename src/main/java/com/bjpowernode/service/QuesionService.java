@@ -16,4 +16,6 @@ public interface QuesionService {
     Question findQuestionById(Integer questionId);
 
     Integer updateQuestion(Question question);
+
+    Integer deleteQuestion(Integer[] questionId);
 }

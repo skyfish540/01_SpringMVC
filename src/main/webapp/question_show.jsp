@@ -11,12 +11,22 @@
 <html>
 <head>
     <title>Title</title>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery_3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#deleteBtn").bind("click",function () {
+                var varnum=$(":checkbox:name=questionId").length
+                alert(varnum)
+            })
+
+        })
+
+
+    </script>
 </head>
 <body>
-
-
              <center>
-                 <form action="<%=request.getContextPath()%>/question/delete.do">
+                 <form action="<%=request.getContextPath()%>/question/private/delete.do">
                     <table border="2">
                         <tr>
                             <td>试题编号</td>
@@ -27,7 +37,10 @@
                             <td>D选项</td>
                             <td>正确答案</td>
                             <td>更新</td>
-                            <td><input type="submit" value="删除"></td>
+                            <td>
+                                <input type="checkbox" name="ck" id="titleCK"/>
+                                <input type="submit" id="deleteBtn" value="删除"/>
+                            </td>
                         </tr>
 
                         <c:forEach items="${questionList}" var="question">
@@ -40,7 +53,7 @@
                                 <td>${question.optionD}</td>
                                 <td>${question.answer}</td>
                                 <td><a href="<%=request.getContextPath()%>/question/private/toUpdate.do?questionId=${question.questionId}">试题更新</a></td>
-                                <td><input type="radio" name="questionId" value="${question.questionId}"></td>
+                                <td><input type="checkbox" name="questionId" value="${question.questionId}"></td>
                             </tr>
                         </c:forEach>
 
