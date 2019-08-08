@@ -14,12 +14,56 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery_3.4.1.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("#deleteBtn").bind("click",function () {
-                var varnum=$(":checkbox:name=questionId").length
-                alert(varnum)
-            })
+            //全选与全不选，标题行状态影响数据行状态
+            $("#titleCk").bind("click",function () {
+                var flag=$(":checkbox[name=ck]")[0].checked
+                var dataCkArray=$(":checkbox[name=questionId]")
+                for (i=0;i<dataCkArray.length;i++){
+                    var dataCk=$(":checkbox[name=questionId]")[i]
+                    dataCk.checked=flag;
+                }
+            });
+            //全选与全不选，数据行状态影响标题行
+            funDataCK();
 
+            //如果删除时没有选中试题，则提示用户
+            $("#deleteBtn").bind("click",function () {
+                var ckNum=$(":checkbox[name=questionId]").length;
+                var checkedNum=0;
+                for (i=0;i<ckNum;i++){
+                    var domObj=$(":checkbox[name=questionId]")[i];
+                    if (domObj.checked==true){
+                        checkedNum++;
+                    }
+                }
+                if (checkedNum==0){
+                    alert("请选择要删除的试题")
+                }
+            })
         })
+        //全选与全不选，数据行状态影响标题行
+        function funDataCK() {
+            var dataCkArray=$(":checkbox[name=questionId]")
+            for (i=0;i<dataCkArray.length;i++){
+                var dataCk=$(":checkbox[name=questionId]")[i]
+                //为数据行上的每个checkbox绑定单击事件
+                dataCk.onclick=function () {
+                    var ckNum=$(":checkbox[name=questionId]").length;
+                    var checkedNum=0;
+                    for (i=0;i<ckNum;i++){
+                        var domObj=$(":checkbox[name=questionId]")[i];
+                        if (domObj.checked==true){
+                            checkedNum++;
+                        }
+                    }
+                    if (checkedNum==dataCkArray.length){
+                        $(":checkbox[name=ck]")[0].checked=true;
+                    }else {
+                        $(":checkbox[name=ck]")[0].checked=false;
+                    }
+                };
+            }
+        }
 
 
     </script>
@@ -38,7 +82,7 @@
                             <td>正确答案</td>
                             <td>更新</td>
                             <td>
-                                <input type="checkbox" name="ck" id="titleCK"/>
+                                <input type="checkbox" name="ck" id="titleCk"/>
                                 <input type="submit" id="deleteBtn" value="删除"/>
                             </td>
                         </tr>
