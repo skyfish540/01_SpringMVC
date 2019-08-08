@@ -22,4 +22,6 @@ public interface QuestionMapper {
     Question selectQuestionByTitle(String title);
 
     List<Question> selectQuestion();
+
+    List<Question> selectRandQuestion();
 }

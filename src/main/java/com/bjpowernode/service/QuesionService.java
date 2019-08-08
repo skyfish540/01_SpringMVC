@@ -18,4 +18,6 @@ public interface QuesionService {
     Integer updateQuestion(Question question);
 
     Integer deleteQuestion(Integer[] questionId);
+
+    List<Question> findRandExams();
 }

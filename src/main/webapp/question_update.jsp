@@ -18,7 +18,7 @@
 
                       <tr>
                           <td>题目编号</td>
-                          <td><input type="text" name='questionId' value="${question.questionId}"></td>
+                          <td><input type="text" readonly name='questionId' value="${question.questionId}"></td>
                       </tr>
                       <tr>
                           <td>题目</td>
@@ -44,7 +44,7 @@
                       <tr>
                           <td>answer</td>
                           <td>
-                             <input type="text" name="answer" value="${question.answer}">
+                             <input type="text" name="answer"  value="${question.answer}">
                           </td>
                       </tr>
                       <tr>

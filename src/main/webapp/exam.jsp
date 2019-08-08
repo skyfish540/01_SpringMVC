@@ -13,9 +13,9 @@
 </head>
 <body>
          <center>
-             <form action="/myWeb/score.do">
+             <form action="<%=request.getContextPath()%>/question/private/score.do" method="post">
                  <table border="2">
-                    <c:forEach items="${key}" var="obj">
+                    <c:forEach items="${exams}" var="obj">
                         <tr>
                             <td rowspan="5">题目${obj.questionId}:${obj.title}</td>
 
@@ -36,9 +36,9 @@
                                 <input type="radio" name="${obj.questionId}" value="B">B
                                 <input type="radio" name="${obj.questionId}" value="C">C
                                 <input type="radio" name="${obj.questionId}" value="D">D
+                                <input type="hidden" name="answer${obj.questionId}" value="${obj.answer}">
                             </td>
                         </tr>
-
                     </c:forEach>
                      <tr>
                          <td colspan="2"><input type="submit" value="交卷"></td>

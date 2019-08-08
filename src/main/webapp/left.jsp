@@ -21,7 +21,7 @@
         </ol>
     </li>
 
-    <li><a href="/<%=request.getContextPath()%>/question/private/rand.do" target="right">参加考试</a></li>
+           <li><a href="<%=request.getContextPath()%>/question/private/randExam.do" target="right">参加考试</a></li>
 </ul>
 
 </body>

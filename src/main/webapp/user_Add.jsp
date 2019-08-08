@@ -6,7 +6,6 @@
     <title>Title</title>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery_3.4.1.js"></script>
     <script type="text/javascript">
-        alert(1111)
         $(function () {
             //为id为uname的元素绑定一个失去焦点的事件
             $("#lgName").bind("blur",function () {

@@ -63,4 +63,10 @@ public class QuestionServiceImpl implements QuesionService {
             return 0;
         }
     }
+
+    @Override
+    public List<Question> findRandExams() {
+        List<Question> questionList=questionMapper.selectRandQuestion();
+        return questionList;
+    }
 }
