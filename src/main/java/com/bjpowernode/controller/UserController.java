@@ -25,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/checkLoginName.do")
-    public @ResponseBody Object loginNameCheck(String loginName){
+    public @ResponseBody Object loginNameCheck(String loginName) {
         CommonsReturnObject returnObject = new CommonsReturnObject();
         User user=null;
         if ("".equals(loginName)||loginName==null){

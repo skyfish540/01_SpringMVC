@@ -9,6 +9,30 @@
 <html>
 <head>
     <title>Title</title>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery_3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var charNum=$(":text[name=title]").val().length
+            $(":text[name=title]").bind("blur",function () {
+                var changeNum=$(this).val().length
+                if (charNum!=changeNum){
+                    $.post(
+                        "<%=request.getContextPath()%>/question/check.do",
+                        {title:$(this).val()},
+                        function (data) {
+                            if (data.code!="0"){
+                                $("#mySpan").html('<span style="color: red">'+data.errorMessage+'</span>')
+                                return false
+                            }
+                            $("#mySpan").html('<span style="color: green">'+data.errorMessage+'</span>')
+                        },
+                        "JSON"
+                    )
+                }
+            })
+        })
+
+    </script>
 
 </head>
 <body>
@@ -22,7 +46,10 @@
                       </tr>
                       <tr>
                           <td>题目</td>
-                          <td><input type="text" name='title' value="${question.title}"></td>
+                          <td>
+                              <input type="text" name='title' value="${question.title}">
+                              <span style="color: red" id="mySpan">*</span>
+                          </td>
                       </tr>
                       <tr>
                           <td>A</td>
